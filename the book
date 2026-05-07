@@ -72,7 +72,7 @@ a:hover { color: var(--accent); }
 .brand small { display:block; color: var(--accent); letter-spacing: .16em; font-weight: 800; font-size: 11px; text-transform: uppercase; }
 .brand strong { display:block; font-size: 23px; line-height: 1.25; margin-top: 8px; }
 .brand span { display:block; color: var(--muted); font-size: 13px; margin-top: 8px; }
-.controls { display:grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
+.controls { display:grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 16px 0; }
 button, input {
   font: inherit;
 }
@@ -132,6 +132,7 @@ button:hover { border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
 .cover-actions { display:flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 32px; }
 .cover-actions a { text-decoration: none; border: 1px solid var(--line); padding: 11px 16px; border-radius: 999px; font-weight: 800; background: var(--paper-2); }
 .cover-actions a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.mobile-only { display: none !important; }
 .chapter-cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 24px; }
 .chapter-card { display:block; text-decoration: none; background: color-mix(in srgb, var(--paper-2) 84%, transparent); border: 1px solid var(--line); border-radius: 18px; padding: 16px; min-height: 154px; }
 .chapter-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
@@ -206,38 +207,83 @@ body.searching .chapter.hidden { display: none; }
 body.searching .empty-state.show { display: block; }
 .mobile-topbar { display:none; position: sticky; top:0; z-index:35; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); padding: 9px 14px; }
 .mobile-topbar a { font-weight: 900; text-decoration:none; }
+.mobile-reader-toc { display: none; }
+.mobile-reader-toc-panel {
+  margin-bottom: 18px;
+  padding: 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--paper) 94%, transparent), color-mix(in srgb, var(--paper-2) 96%, transparent));
+  box-shadow: var(--shadow);
+}
+.mobile-reader-toc-kicker {
+  display: inline-flex;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.mobile-reader-toc h2 {
+  margin: 10px 0 6px;
+  font-size: clamp(26px, 6vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -.04em;
+}
+.mobile-reader-toc p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.mobile-reader-actions,
+.mobile-reader-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+.mobile-reader-shortcuts { grid-template-columns: 1fr 1fr; }
+.mobile-reader-actions button,
+.mobile-reader-shortcuts a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper-2);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.mobile-reader-shortcuts a.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.mobile-reader-toc-nav { margin-top: 14px; }
+.mobile-reader-toc-nav .toc-cover {
+  margin-bottom: 8px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.mobile-reader-toc-nav .toc-chapter { margin: 0; }
+.mobile-reader-toc-nav .toc-chapter summary {
+  padding: 12px 2px;
+  font-size: 14px;
+}
+.mobile-reader-toc-nav .toc-chapter ol {
+  padding-bottom: 10px;
+  font-size: 12px;
+}
 @media (max-width: 980px) {
   .layout { grid-template-columns: 1fr; }
-  .sidebar {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    height: auto;
-    max-height: none;
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-  }
-  .sidebar .toc { order: 1; }
-  .sidebar .toc::before {
-    content: "목차";
-    display: block;
-    margin: 0 0 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--line);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-  }
-  .sidebar .brand { order: 2; margin-bottom: 0; }
-  .sidebar .controls { order: 3; margin: 0; }
-  .sidebar .search-box { order: 4; margin: 0; }
-  .sidebar .search-meta { order: 5; margin: 0 2px; }
-  .sidebar #clearSearch { order: 6; margin-bottom: 0 !important; }
-  .sidebar .sidebar-footer { order: 7; margin-top: 0; }
+  .sidebar { display: none; }
   .mobile-topbar { display: flex; justify-content: space-between; align-items:center; }
+  .mobile-reader-toc { display: block; }
+  .desktop-only { display: none !important; }
+  .mobile-only { display: inline-flex !important; }
   .reader { padding: 24px 16px 64px; }
   .chapter { padding: 26px 20px; border-radius: 18px; font-size: calc(16.5px * var(--reading-scale)); }
   .anchor { display: none; }
@@ -249,6 +295,8 @@ body.searching .empty-state.show { display: block; }
   .chapter h1 { font-size: 32px; }
   .chapter-nav { grid-template-columns: 1fr; }
   .chapter-nav .next { text-align:left; }
+  .mobile-reader-actions { grid-template-columns: 1fr 1fr; }
+  .mobile-reader-shortcuts { grid-template-columns: 1fr; }
 }
 @media print {
   body { background: white; color: black; }
@@ -583,6 +631,14 @@ body { padding-bottom: 104px; }
   gap: 8px;
   justify-items: end;
 }
+.tts-bar-hide {
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--paper-2));
+}
 .tts-bar-options {
   display: grid;
   grid-template-columns: minmax(120px, 180px) minmax(150px, 220px);
@@ -636,6 +692,7 @@ body { padding-bottom: 104px; }
   .tts-bar-shell { grid-template-columns: 1fr; gap: 9px; }
   .tts-bar-controls { grid-template-columns: repeat(4, 1fr); }
   .tts-bar-right { justify-items: stretch; }
+  .tts-bar-hide { width: 100%; min-height: 40px; }
   .tts-bar-options { grid-template-columns: 1fr 1fr; }
   .tts-bar-controls button, .tts-bar-controls button.primary { width: 100%; height: 42px; margin: 0; border-radius: 999px; }
   .tts-bar-options { grid-template-columns: 1fr; }
@@ -658,7 +715,7 @@ body.audiobook-bar-hidden .audiobook-bar { display: none !important; }
 <body>
 <a class="skip-link" href="#main">본문으로 바로가기</a>
 <div aria-hidden="true" class="progress"><span id="progressBar"></span></div>
-<div class="mobile-topbar"><a href="#sidebar">현실의 괴물이 되는 길</a><span>웹북</span></div>
+<div class="mobile-topbar"><a href="#mobileToc">현실의 괴물이 되는 길</a><span>웹북</span></div>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
 <a class="brand" href="#cover">
@@ -671,7 +728,6 @@ body.audiobook-bar-hidden .audiobook-bar { display: none !important; }
 <button id="themeToggle" title="다크모드 전환" type="button">테마</button>
 <button id="fontMinus" title="글자 작게" type="button">A−</button>
 <button id="fontPlus" title="글자 크게" type="button">A+</button>
-<button id="audioBarToggle" title="하단 오디오북 바 숨기기" type="button">오디오 숨김</button>
 </div>
 <div class="search-box">
 <input aria-label="웹북 검색" autocomplete="off" id="searchInput" placeholder="검색 / 단축키 /" type="search"/>
@@ -1069,6 +1125,23 @@ body.audiobook-bar-hidden .audiobook-bar { display: none !important; }
 </aside>
 <main class="main" id="main">
 <div class="reader">
+<section class="mobile-reader-toc" id="mobileToc" aria-labelledby="mobileTocTitle">
+<div class="mobile-reader-toc-panel">
+<span class="mobile-reader-toc-kicker">Quick Start</span>
+<h2 id="mobileTocTitle">목차</h2>
+<p>휴대폰에서는 데스크톱 사이드바 대신 이 목차 카드에서 바로 장으로 이동할 수 있습니다.</p>
+<div aria-label="모바일 읽기 설정" class="mobile-reader-actions">
+<button id="mobileThemeToggle" type="button">테마</button>
+<button id="mobileFontMinus" type="button">A−</button>
+<button id="mobileFontPlus" type="button">A+</button>
+</div>
+<div class="mobile-reader-shortcuts">
+<a class="primary" href="#chapter-a1">처음부터 읽기</a>
+<a href="#cover">표지 보기</a>
+</div>
+<div class="mobile-reader-toc-nav" id="mobileTocNav"></div>
+</div>
+</section>
 <section class="cover" id="cover">
 <div class="cover-panel">
 <div class="eyebrow">정적 웹북</div>
@@ -1077,7 +1150,8 @@ body.audiobook-bar-hidden .audiobook-bar { display: none !important; }
 <p class="lead">실제 문제 · 흐름 · 제약요인 · 검증 · 실행 순서 · 병목를 하나의 읽기 경험으로 묶었습니다. 목차, 장 이동, 검색, 다크모드, 글자 크기 조절, 즉석 낭독을 지원합니다.</p>
 <div class="cover-actions">
 <a class="primary" href="#chapter-a1">처음부터 읽기</a>
-<a href="#sidebar">목차 보기</a>
+<a class="desktop-only" href="#sidebar">목차 보기</a>
+<a class="mobile-only" href="#mobileToc">목차 보기</a>
 <a href="javascript:window.print()">인쇄/PDF 저장</a>
 </div>
 <div class="chapter-cards">
@@ -15403,6 +15477,7 @@ AI가 많이 만들수록, 사람은 더 잘 검수하고, 더 잘 책임지고,
       <div class="tts-bar-progress" aria-hidden="true"><span id="ttsBarProgress"></span></div>
     </div>
     <div class="tts-bar-right">
+      <button id="audioBarHide" class="tts-bar-hide" type="button" title="하단 오디오북 바 숨기기" aria-label="하단 오디오북 바 숨기기">오디오 숨기기</button>
       <div aria-label="오디오북 제어" class="tts-bar-controls">
         <button id="ttsBarPrev" title="이전 섹션" type="button" aria-label="이전 섹션">⏮</button>
         <button class="primary" id="ttsBarToggle" title="재생" type="button" aria-label="재생">▶</button>
@@ -15550,10 +15625,16 @@ const ttsStore = {
   last: 'webbook-tts-last-section-v1',
   pos: (slug) => 'webbook-tts-pos-section-v1-' + slug
 };
+const mobileTocEls = {
+  nav: document.querySelector('#mobileTocNav'),
+  theme: document.querySelector('#mobileThemeToggle'),
+  fontMinus: document.querySelector('#mobileFontMinus'),
+  fontPlus: document.querySelector('#mobileFontPlus')
+};
 const audioBarStoreKey = 'webbook-audiobook-bar-hidden-v1';
 const audioBarEls = {
   bar: document.querySelector('#audiobookBar'),
-  toggle: document.querySelector('#audioBarToggle'),
+  toggle: document.querySelector('#audioBarHide'),
   reveal: document.querySelector('#audioBarReveal')
 };
 let ttsRunToken = 0;
@@ -15572,14 +15653,27 @@ const ttsState = {
 function setAudiobookBarHidden(hidden) {
   body.classList.toggle('audiobook-bar-hidden', hidden);
   if (audioBarEls.toggle) {
-    const label = hidden ? '오디오 보기' : '오디오 숨김';
-    const title = hidden ? '하단 오디오북 바 보이기' : '하단 오디오북 바 숨기기';
-    audioBarEls.toggle.textContent = label;
-    audioBarEls.toggle.title = title;
-    audioBarEls.toggle.setAttribute('aria-label', title);
+    audioBarEls.toggle.textContent = '오디오 숨기기';
+    audioBarEls.toggle.title = '하단 오디오북 바 숨기기';
+    audioBarEls.toggle.setAttribute('aria-label', '하단 오디오북 바 숨기기');
   }
   if (audioBarEls.reveal) audioBarEls.reveal.hidden = !hidden;
   localStorage.setItem(audioBarStoreKey, hidden ? '1' : '0');
+}
+
+function initMobileToc() {
+  if (mobileTocEls.nav) {
+    const sourceToc = document.querySelector('#sidebar .toc');
+    if (sourceToc && !mobileTocEls.nav.children.length) {
+      const cloned = sourceToc.cloneNode(true);
+      cloned.setAttribute('aria-label', '모바일 목차');
+      cloned.querySelectorAll('details').forEach(detail => detail.removeAttribute('open'));
+      mobileTocEls.nav.replaceChildren(cloned);
+    }
+  }
+  if (mobileTocEls.theme) mobileTocEls.theme.addEventListener('click', () => document.querySelector('#themeToggle').click());
+  if (mobileTocEls.fontMinus) mobileTocEls.fontMinus.addEventListener('click', () => document.querySelector('#fontMinus').click());
+  if (mobileTocEls.fontPlus) mobileTocEls.fontPlus.addEventListener('click', () => document.querySelector('#fontPlus').click());
 }
 
 function initAudiobookBarVisibility() {
@@ -16204,6 +16298,7 @@ function ttsInit() {
     ttsStopMediaSession();
   });
 }
+initMobileToc();
 initAudiobookBarVisibility();
 ttsInit();
 </script>
